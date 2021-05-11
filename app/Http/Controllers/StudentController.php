@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -13,7 +14,13 @@ class StudentController extends Controller
     {
 
         $students = Student::all();
-        return view('data.index', ['data' => $students]);
+        $var = DB::table('students')
+            ->select('score', DB::raw('COUNT(score)'))
+            ->orderBy('score', 'ASC')
+            ->groupBy('score')
+            ->get();
+            
+        return view('data.index', compact('students', 'var'));
     }
 
     public function delete(Request $request)
@@ -25,7 +32,7 @@ class StudentController extends Controller
 
     public function scoreEdit(Request $request)
     {
-        dd($request->all());
+
         $student = Student::findOrFail($request->id);
         $student->score = $request->score;
         $student->save();

@@ -36,7 +36,17 @@
           <th>Score (1-10)</th>
         </tr>
       </thead>
-      @foreach ($data as $item)
+
+      @php
+      $counter = array_fill(0,10,0);
+      @endphp
+
+      @foreach ($students as $item)
+
+      @php
+      $counter[$item->score-1]++;
+      @endphp
+
       <tbody>
         <tr onClick="changeImage('{{asset("storage/"  . "c" . sprintf("%02d", $item->avatar_type) . "/" . "c" .  sprintf("%02d", $item->avatar_type) . "_lv" . sprintf("%03d", $item->score) . ".png")}}')">
           <td>
@@ -55,9 +65,9 @@
               @csrf
               @method("PATCH")
               <span class="minus bg-dark">-</span>
-              <input type="number" class="count" name="score" value="{{$item['score']}}">
+              <input type="number" readonly="true" class="count" name="score" value="{{$item['score']}}">
               <span class="plus bg-dark">+</span>
-              <button>✓</button>
+              <button type="submit">✓</button>
             </form>
 
           </td>
@@ -91,16 +101,9 @@
       <tbody>
         <tr>
           <td>Count</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          @foreach($counter as $score)
+          <td>{{$score}}</td>
+          @endforeach
         </tr>
       </tbody>
     </table>
@@ -121,7 +124,6 @@
   });
 
   $(document).ready(function() {
-    $('.count').prop('disabled', true);
     $(document).on('click', '.plus', function() {
       $(this).parent().find('.count').val(parseInt($(this).parent().find('.count').val()) + 1);
       if ($(this).parent().find('.count').val() > 10) {
