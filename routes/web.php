@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/data', [StudentController::class, 'index']);
+
+Route::delete("/student/delete/{id}", [StudentController::class, "delete"])->name('student/delete');
+
+Route::patch("/student/scoreEdit/{id}", [StudentController::class, "scoreEdit"])->name('student/scoreEdit');

@@ -13,6 +13,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="{{asset('css/common.css')}}">
 </head>
 
 
@@ -37,11 +39,28 @@
       @foreach ($data as $item)
       <tbody>
         <tr onClick="changeImage('{{asset("storage/"  . "c" . sprintf("%02d", $item->avatar_type) . "/" . "c" .  sprintf("%02d", $item->avatar_type) . "_lv" . sprintf("%03d", $item->score) . ".png")}}')">
-          <td>1</td>
+          <td>
+            <form action="{{route('student/delete', $item->id)}}" method="POST">
+              @csrf
+              @method("DELETE")
+              {{$loop->index + 1}}
+              <button>x</button>
+            </form>
+          </td>
           <td>{{$item['name']}}</td>
           <td>{{$item['id']}}</td>
           <td>{{$item['avatar_type']}}</td>
-          <td>{{$item['score']}}</td>
+          <td>
+            <form action="{{route('student/scoreEdit', $item->id)}}" method="POST">
+              @csrf
+              @method("PATCH")
+              <span class="minus bg-dark">-</span>
+              <input type="number" class="count" name="score" value="{{$item['score']}}">
+              <span class="plus bg-dark">+</span>
+              <button>✓</button>
+            </form>
+
+          </td>
         </tr>
       </tbody>
       @endforeach
@@ -52,7 +71,40 @@
 
   </div>
 
-  <!-- insert table for tally here -->
+  <div class="container well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Score</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+          <th>7</th>
+          <th>8</th>
+          <th>9</th>
+          <th>10</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Count</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
@@ -66,6 +118,22 @@
   $('#myTable tbody td').click(function() {
     $('tr').removeClass('bg-success');
     $(this).parent().addClass('bg-success');
+  });
+
+  $(document).ready(function() {
+    $('.count').prop('disabled', true);
+    $(document).on('click', '.plus', function() {
+      $(this).parent().find('.count').val(parseInt($(this).parent().find('.count').val()) + 1);
+      if ($(this).parent().find('.count').val() > 10) {
+        $(this).parent().find('.count').val(10);
+      }
+    });
+    $(document).on('click', '.minus', function() {
+      $(this).parent().find('.count').val(parseInt($(this).parent().find('.count').val()) - 1);
+      if ($(this).parent().find('.count').val() == 0) {
+        $(this).parent().find('.count').val(1);
+      }
+    });
   });
 </script>
 
