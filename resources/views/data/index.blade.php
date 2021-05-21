@@ -23,7 +23,7 @@
 
 <body>
 
-  <h1>Admin panel (GM)</h1>
+  <h1 align="left">Admin panel (GM)</h1>
 
   <div class="container well">
     <table class="table table-hover" id="myTable">
@@ -82,7 +82,7 @@
   </div>
 
   <div class="container well">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th>Score</th>
@@ -100,7 +100,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>Count</td>
+          <td align="left">Student Count</td>
           @foreach($counter as $score)
           <td>{{$score}}</td>
           @endforeach
