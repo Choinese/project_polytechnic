@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 /*
@@ -22,4 +23,9 @@ Route::get('/data', [StudentController::class, 'index']);
 Route::delete("/student/delete/{id}", [StudentController::class, "delete"])->name('student/delete');
 
 Route::patch("/student/scoreEdit/{id}", [StudentController::class, "scoreEdit"])->name('student/scoreEdit');
+
+
+Route::get('/data', [PagesController::class, 'index']);
+
+Route::post('/uploadFile', [PagesController::class, 'uploadFile']);
 

@@ -109,6 +109,23 @@
     </table>
   </div>
 
+
+  <!-- Message -->
+  @if(Session::has('message'))
+  <p>{{ Session::get('message') }}</p>
+  @endif
+
+  <div class="container well">
+    <!-- Form -->
+    <form method='post' action='/uploadFile' enctype='multipart/form-data'>
+      {{ csrf_field() }}
+      <label for="file">Select file to import</label>
+      <input type='file' name='file'>
+      <input type='submit' name='submit' value='Import'>
+
+    </form>
+  </div>
+
 </body>
 
 
