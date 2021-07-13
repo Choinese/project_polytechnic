@@ -3,6 +3,7 @@
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,7 @@ use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');;
 
 Route::get('/data', [StudentController::class, 'index']);
 
@@ -29,3 +30,16 @@ Route::get('/data', [PagesController::class, 'index']);
 
 Route::post('/uploadFile', [PagesController::class, 'uploadFile']);
 
+// Guest
+Route::middleware(['guest'])->group(function () {
+
+    // Login
+    Route::get('/login', [AuthController::class, 'getLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'postLogin']);
+
+    // Register
+    Route::get('/register', [AuthController::class, 'getRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'postRegister']);
+
+
+});
