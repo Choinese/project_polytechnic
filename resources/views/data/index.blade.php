@@ -25,6 +25,16 @@
 
   <h1 align="left">Admin panel (GM)</h1>
 
+  @auth
+  <p>Logged in as: {{Auth::user()->email}}</p>
+  @endauth
+
+  <form action="{{route('logout')}}" method="POST">
+    @csrf
+    <button>Log Out</button>
+  </form>
+
+
   <div class="container well">
     <table class="table table-hover" id="myTable">
       <thead>
