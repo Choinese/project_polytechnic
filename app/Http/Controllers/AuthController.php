@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +26,7 @@ class AuthController extends Controller
             'password_confirmation' => ['required', 'same:password']
         ]);
 
-        $user = new Student();
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
