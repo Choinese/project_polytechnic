@@ -13,15 +13,22 @@ use Illuminate\Support\Facades\Session;
 
 
 use App\Http\Controllers\StudentController;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
   public function index()
   {
+    $students = Auth::user()->students;
+    return view('data.index', compact('students'));
+  }
+
+  /**public function index()
+  {
     $students = Student::all();
     $var = DB::table('students');
     return view('data.index', compact('students', 'var'));
-  }
+  }**/
 
   public function uploadFile(Request $request)
   {
@@ -86,7 +93,8 @@ class PagesController extends Controller
               "name" => $importData[0],
               "id" => $importData[1],
               "avatar_type" => $importData[2],
-              "score" => $importData[3]
+              "score" => $importData[3],
+              "user_id" => Auth::id()
             );
             Page::insertData($insertData);
           }

@@ -26,7 +26,7 @@ Route::delete("/student/delete/{id}", [StudentController::class, "delete"])->nam
 Route::patch("/student/scoreEdit/{id}", [StudentController::class, "scoreEdit"])->name('student/scoreEdit');
 
 
-Route::get('/data', [PagesController::class, 'index']);
+Route::get('/list', [PagesController::class, 'index']);
 
 Route::post('/uploadFile', [PagesController::class, 'uploadFile']);
 

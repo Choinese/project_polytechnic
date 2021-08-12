@@ -6,6 +6,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
@@ -13,7 +14,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        $students = Student::all();
+        $students = Auth::user()->students;        
         $var = DB::table('students')
             ->select('score', DB::raw('COUNT(score)'))
             ->orderBy('score', 'ASC')

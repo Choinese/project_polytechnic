@@ -125,7 +125,7 @@
   <p>{{ Session::get('message') }}</p>
   @endif
 
-  <div class="container well">
+  <div>
     <!-- Form -->
     <form method='post' action='/uploadFile' enctype='multipart/form-data'>
       {{ csrf_field() }}
