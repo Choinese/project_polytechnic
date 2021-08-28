@@ -12,7 +12,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
   <link rel="stylesheet" href="{{asset('css/common.css')}}">
 </head>
@@ -35,7 +35,28 @@
   </form>
 
 
-  <div class="container well">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        No.
+      </div>
+      <div class="col-sm">
+        Student Name
+      </div>
+      <div class="col-sm">
+        Student Id
+      </div>
+      <div class="col-sm">
+        Character ID
+      </div>
+      <div class="col-sm">
+        Score (1-10)
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="container well">
     <table class="table table-hover" id="myTable">
       <thead>
         <tr>
@@ -45,51 +66,82 @@
           <th>Character ID</th>
           <th>Score (1-10)</th>
         </tr>
-      </thead>
+      </thead> -->
 
-      @php
-      $counter = array_fill(0,10,0);
-      @endphp
+  @php
+  $counter = array_fill(0,10,0);
+  @endphp
 
-      @foreach ($students as $item)
+  @foreach ($students as $item)
 
-      @php
-      $counter[$item->score-1]++;
-      @endphp
+  @php
+  $counter[$item->score-1]++;
+  @endphp
 
-      <tbody>
-        <tr onClick="changeImage('{{asset("storage/"  . "c" . sprintf("%02d", $item->avatar_type) . "/" . "c" .  sprintf("%02d", $item->avatar_type) . "_lv" . sprintf("%03d", $item->score) . ".png")}}')">
-          <td>
-            <form action="{{route('student/delete', $item->id)}}" method="POST">
-              @csrf
-              @method("DELETE")
-              {{$loop->index + 1}}
-              <button>x</button>
-            </form>
-          </td>
-          <td>{{$item['name']}}</td>
-          <td>{{$item['id']}}</td>
-          <td>{{$item['avatar_type']}}</td>
-          <td>
-            <form action="{{route('student/scoreEdit', $item->id)}}" method="POST">
-              @csrf
-              @method("PATCH")
-              <span class="minus bg-dark">-</span>
-              <input type="number" readonly="true" class="count" name="score" value="{{$item['score']}}">
-              <span class="plus bg-dark">+</span>
-              <button type="submit">✓</button>
-            </form>
-
-          </td>
-        </tr>
-      </tbody>
-      @endforeach
-    </table>
-
-    <div id="showAvatar">
+  <div class="container">
+    <div class="row" onClick="changeImage('{{asset("storage/"  . "c" . sprintf("%02d", $item->avatar_type) . "/" . "c" .  sprintf("%02d", $item->avatar_type) . "_lv" . sprintf("%03d", $item->score) . ".png")}}')">
+      <div class="col-sm">
+        <form action="{{route('student/delete', $item->id)}}" method="POST">
+          @csrf
+          @method("DELETE")
+          {{$loop->index + 1}}
+          <button>x</button>
+        </form>
+      </div>
+      <div class="col-sm">
+        {{$item['name']}}
+      </div>
+      <div class="col-sm">
+        {{$item['id']}}
+      </div>
+      <div class="col-sm">
+        {{$item['avatar_type']}}
+      </div>
+      <div class="col-sm">
+        <form action="{{route('student/scoreEdit', $item->id)}}" method="POST">
+          @csrf
+          @method("PATCH")
+          <span class="minus bg-dark">-</span>
+          <input type="number" readonly="true" class="count" name="score" value="{{$item['score']}}">
+          <span class="plus bg-dark">+</span>
+          <button type="submit">✓</button>
+        </form>
+      </div>
     </div>
-
+    <div class="row">
+      <div id="showAvatar">
+    </div>
+    </div>
   </div>
+
+  <!-- <tbody>
+    <tr onClick="changeImage('{{asset("storage/"  . "c" . sprintf("%02d", $item->avatar_type) . "/" . "c" .  sprintf("%02d", $item->avatar_type) . "_lv" . sprintf("%03d", $item->score) . ".png")}}')">
+      <td>
+        <form action="{{route('student/delete', $item->id)}}" method="POST">
+          @csrf
+          @method("DELETE")
+          {{$loop->index + 1}}
+          <button>x</button>
+        </form>
+      </td>
+      <td>{{$item['name']}}</td>
+      <td>{{$item['id']}}</td>
+      <td>{{$item['avatar_type']}}</td>
+      <td>
+        <form action="{{route('student/scoreEdit', $item->id)}}" method="POST">
+          @csrf
+          @method("PATCH")
+          <span class="minus bg-dark">-</span>
+          <input type="number" readonly="true" class="count" name="score" value="{{$item['score']}}">
+          <span class="plus bg-dark">+</span>
+          <button type="submit">✓</button>
+        </form>
+      </td>
+    </tr>
+  </tbody> -->
+
+  @endforeach
+
 
   <div class="container well">
     <table class="table table-bordered">

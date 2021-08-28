@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
             [
                 'name' => 'Li Jialong2',
-                'email' => 'lijia@gmail.com2',
+                'email' => 'lijia2@gmail.com',
                 'password' => bcrypt('lijia123'),
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],

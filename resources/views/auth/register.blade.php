@@ -6,7 +6,6 @@
     <section class="clean-block clean-form dark">
         <div class="container">
             <div class="block-heading">
-                <br><br>
                 <h2 class="text-info">Registration</h2>
                 <p>To register, please enter your personal information below.</p>
             </div>
@@ -29,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="password">Password<span class="text-danger">*</span></label>
-                    <input class="form-control item {{$errors->has('password') ? 'is-invalid' : ''}}" type="password" name="password" placeholder="Password" >
+                    <input class="form-control item {{$errors->has('password') ? 'is-invalid' : ''}}" type="password" name="password" placeholder="Password">
                     @error('password')
                     <div class="invalid-feedback">{{$message}}</div>
                     @enderror
@@ -52,4 +51,4 @@
         </div>
     </section>
 </main>
-@endcontent
+@endsection
